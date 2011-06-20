@@ -1,0 +1,58 @@
+Coinsplit is a tool for generating bitcoin addresses outside of bitcoin
+and splitting them into halves and importing them into wallets.
+
+** WARNING: THIS IS A VERY NEW TOOL! DON'T USE IT ON YOUR WALLET!
+   BY DEFAULT, THIS TOOL USES THE BITCOIN TESTNET (See -DUSE_TESTNET
+   in the Makefile.)
+
+COINSPLIT COOKBOOK.
+
+Recipe 1:
+Generate a bitcoin address on a computer without bitcoin installed.
+Perhaps for security purposes.
+
+  $ coinsplit --generate test.addr
+  (Bitcoin address and private key print to stdout.)
+ 
+  (...then later when you want to access the address...)
+  $ coinsplit wallet.dat --import test.addr
+
+Recipe 2:
+Split a bitcoin address into halves. Perhaps for safe-keeping. Both
+parts are needed in order to import the key. This is done as a
+one-time pad.
+
+  $ coinsplit --generate --split key.pt1 key.pt2
+  (Two files are created, each listing the bitcoin address and
+  half of the private key.)
+
+  (...then to import the address...)
+  $ coinsplit wallet.dat --import key.pt1 key.pt2
+
+Recipe 3:
+Store all keys in ~/.bitcoin/wallet.dat as two separate halves.
+
+  $ coinsplit --wallet --split key.pt1 key.pt2
+
+  (Key files can be joined together, so you can add other wallets
+  like...)
+  $ coinsplit --wallet --split key.pt1 key.pt2
+
+Recipe 4:
+Move an address and its key to another wallet.
+
+  $ coinsplit wallet1.dat --address 13zuMXTyQpCxL2GJZ6pdoVF3RzZiKm7XPu | coinsplit wallet2.dat --import
+
+Recipe 5:
+Act as an escrow. Generate a key and split it between the buyer and seller.
+(In this case, the "seller" is selling bitcoins for a cost.) You also keep
+a copy of the buyer's key, to protect the seller.
+
+  $ coinsplit --generate --split 2>buyer.txt | mail -s "RE: 10 BTC" seller@bitcoin.org
+
+The seller sends 10 BTC to the address in the file. The buyer then verifies
+that the coins are present. The buyer pays and the seller gives the buyer the
+other half of the key. The buyer then imports the key:
+
+  $ coinsplit --import buyer.txt seller.txt
+

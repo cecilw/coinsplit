@@ -476,7 +476,7 @@ usage() {
   printf("\t\tGenerates a new offline key and stores it in new.key.\n");
   printf("\tcoinsplit --generate --split new.pt1 new.pt2\n");
   printf("\t\tGenerates a new key and splits it into two halves.\n");
-  printf("\tcoinsplit wallet.dat --address 14Yots3PR3ygt12ksi5MZ36tBdaseQxN46 --split old.pt1 old.pt2\n");
+  printf("\tcoinsplit wallet.dat --address 13zuMXTyQpCxL2GJZ6pdoVF3RzZiKm7XPu --split old.pt1 old.pt2\n");
   printf("\t\tSplits an address from the wallet into two halves.\n");
   printf("\tcoinsplit wallet.dat --wallet --split old.pt1 old.pt2\n");
   printf("\t\tSplits all addresses from the wallet into two halves.\n");
@@ -559,13 +559,13 @@ main(int argc, char *argv[]) {
 
   if (argc > i)
   {
-    save1 = fopen(argv[i], "wb");
+    save1 = fopen(argv[i], "ab");
     i++;
   }
 
   if (argc > i)
   {
-    save2 = fopen(argv[i], "wb");
+    save2 = fopen(argv[i], "ab");
     i++;
   }
 
