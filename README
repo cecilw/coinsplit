@@ -11,8 +11,11 @@ Recipe 1:
 Generate a bitcoin address on a computer without bitcoin installed.
 Perhaps for security purposes.
 
-  $ coinsplit --generate test.addr
+  $ coinsplit --generate
   (Bitcoin address and private key print to stdout.)
+ 
+  $ coinsplit --generate test.addr
+  (This saves to a file.)
  
   (...then later when you want to access the address...)
   $ coinsplit wallet.dat --import test.addr
