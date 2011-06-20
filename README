@@ -5,6 +5,11 @@ and splitting them into halves and importing them into wallets.
    BY DEFAULT, THIS TOOL USES THE BITCOIN TESTNET (See -DUSE_TESTNET
    in the Makefile.)
 
+INSTALLATION.
+
+  $ sudo apt-get install libgmp3-dev libssl-dev libdb4.6-dev
+  $ make
+
 COINSPLIT COOKBOOK.
 
 Recipe 1:
